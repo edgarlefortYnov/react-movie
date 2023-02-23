@@ -1,7 +1,9 @@
+import AllFilms from "../components/Films";
+
 const Films = () => {
     return (
         <>
-            <h1>AllFilm</h1>
+            <AllFilms apiKey={"ae1098c7af94ab11d9a8b077daac4007"} />
         </>
     )
 };
