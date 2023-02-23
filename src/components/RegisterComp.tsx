@@ -33,6 +33,7 @@ export default function Register() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    //A MODIFIER POUR LENREGISTREMENT
     console.log({ firstName, lastName, email, password });
   };
 
