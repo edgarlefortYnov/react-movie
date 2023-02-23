@@ -1,7 +1,9 @@
+import Actors from "../components/Actors";
+
 const Acteurs = () => {
     return (
         <>
-            <h1>AllActeurs</h1>
+            <Actors />
         </>
     )
 };

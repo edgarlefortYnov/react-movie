@@ -16,6 +16,8 @@ export enum SortOption {
     Rating = 'vote_average.desc',
     ReleaseDate = 'release_date.desc',
     Alphabetical = 'original_title.asc',
+    Name = 'name.asc',
+    Birthday = 'birthday.desc',
 }
 
 export interface SearchParams {
@@ -26,4 +28,17 @@ export interface SearchParams {
 export interface FilmsProps {
     apiKey: string;
 }
+
+export interface Actor {
+    id: number;
+    name: string;
+    profile_path: string | null;
+    character: string;
+  }
+  
+  export interface ActorsResponse {
+    page: number;
+    total_pages: number;
+    results: Actor[];
+  }
   
