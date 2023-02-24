@@ -1,7 +1,13 @@
+import LoginComp from "../components/LoginComp";
+
 const Login = () => {
     return (
         <>
-            <h1>Login</h1>
+            <LoginComp onLogin={
+                function (username: string, password: string): void {
+                    throw new Error("Function not implemented.");
+                } 
+            } />
         </>
     )
 };

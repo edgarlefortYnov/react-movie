@@ -1,7 +1,8 @@
+import RegisterComp from "../components/RegisterComp";
 const Register = () => {
     return (
         <>
-            <h1>Register</h1>
+            <RegisterComp />
         </>
     )
 };
