@@ -13,6 +13,7 @@ import './Layout.css';
 import './Home.css';
 import './Footer.css';
 import './Login.css';
+import './Actors.css';
 
 const App = () => {
   return (

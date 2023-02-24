@@ -1,0 +1,12 @@
+.grid-actor{
+    width: 100% !important;
+    margin: 0px !important;
+}
+.pagination-actors ul{
+    justify-content: center;
+    margin: 10px;
+}
+
+.title-actors{
+    margin: 20px !important;
+}

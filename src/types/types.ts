@@ -32,7 +32,7 @@ export interface FilmsProps {
 export interface Actor {
     id: number;
     name: string;
-    profile_path: string | null;
+    profile_path: string | undefined;
     character: string;
   }
   
