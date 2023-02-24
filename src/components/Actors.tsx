@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Container, Grid, TextField, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ActorCard from './ActorCard';
-import { Actor, SortOption } from './types';
+import { Actor, SortOption } from '../types/types';
 
 const useStyles = makeStyles((theme) => ({
   root: {

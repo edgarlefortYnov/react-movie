@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardActionArea, CardContent, CardMedia, Typography } from '@material-ui/core';
-import { Actor } from './types';
+import { Actor } from '../types/types';
 
 const useStyles = makeStyles({
   root: {

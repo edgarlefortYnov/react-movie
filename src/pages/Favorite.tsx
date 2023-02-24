@@ -1,7 +1,8 @@
+import Favorites from "../components/Favorite";
 const Favorite = () => {
     return (
         <>
-            <h1>Fav</h1>
+            <Favorites />
         </>
     )
 };
