@@ -1,5 +1,6 @@
 import React from 'react'
 import SearchBar from '../components/SearchBar'
+import SliderFilms from '../components/SliderFilms'
 
 const Home = () => {
     return (
@@ -11,7 +12,7 @@ const Home = () => {
             </section>
             <section className='film-slider'>
                 <h3>Tendance</h3>
-                <h1>SLIDER FILM</h1>
+                <SliderFilms />
                 <h1>SLIDER ACTEURS</h1>
             </section>
         </div>

@@ -13,6 +13,9 @@ import './Layout.css';
 import './Home.css';
 import './Footer.css';
 import './Login.css';
+import './Actors.css';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const App = () => {
   return (
