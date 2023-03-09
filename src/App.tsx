@@ -1,5 +1,6 @@
 import React from 'react';
 import {BrowserRouter, Route, Routes } from 'react-router-dom'
+import AuthProvider from './provider/AuthProvider'
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Layout from './pages/Layout';
@@ -12,7 +13,7 @@ import './App.css';
 import './Layout.css';
 import './Home.css';
 import './Footer.css';
-import './Login.css';
+import './pages/Login.css';
 import './Actors.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -21,16 +22,18 @@ const App = () => {
   return (
     <div className="App">
       <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path='all_films' element={<Films />} />
-            <Route path='all_acteurs' element={<Acteurs />} />
-            <Route path='fav' element={<Favorite />} />
-            <Route path='register' element={<Register />} />
-            <Route path='login' element={<Login />} />
-          </Route>
-        </Routes>
+          <AuthProvider>
+              <Routes>
+                  <Route path='/' element={<Layout />}>
+                      <Route index element={<Home />} />
+                      <Route path='all_films' element={<Films />} />
+                      <Route path='all_acteurs' element={<Acteurs />} />
+                      <Route path='fav' element={<Favorite />} />
+                      <Route path='register' element={<Register />} />
+                      <Route path='login' element={<Login />} />
+                  </Route>
+              </Routes>
+          </AuthProvider>
       </BrowserRouter>
       <Footer />
     </div>
