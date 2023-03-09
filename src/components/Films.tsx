@@ -20,13 +20,19 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface Props {
   apiKey: string;
+  searchQueryHome?: string;
 }
 
-const Films = ({ apiKey }: Props) => {
+const Films = ({ apiKey, searchQueryHome }: Props) => {
   const classes = useStyles();
   const [movies, setMovies] = useState<Movie[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [sortOption, setSortOption] = useState<SortOption>(SortOption.Popularity);
+
+  console.log(searchQueryHome);
+  if (searchQueryHome !== undefined) {
+    setSearchQuery(searchQueryHome);
+  }
 
   useEffect(() => {
     fetchMovies();

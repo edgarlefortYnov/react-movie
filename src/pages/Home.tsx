@@ -7,7 +7,7 @@ const Home = () => {
         <div>
             <section className='home-search'>
                 <h1>Bienvenue,</h1>
-                <h2>Des millions de films et artistes ...</h2>
+                <h2>Des millions de films ...</h2>
                 <SearchBar />
             </section>
             <section className='film-slider'>
