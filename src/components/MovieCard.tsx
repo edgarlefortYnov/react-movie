@@ -30,11 +30,11 @@ const MovieCard = ({ movie }: Props) => {
 
     const classes = useStyles();
     const { user } = useContext(AuthContext)
-    const addToFavorite = async (id: number, email: string | null) => {
+    const addToFavorite = async (movie: Movie, email: string | null) => {
         console.log("button triggered")
         await addDoc(collection(db, "favorites"), {
             userEmail: email,
-            filmId: id
+            movie: movie
         });
     };
 
@@ -61,7 +61,7 @@ const MovieCard = ({ movie }: Props) => {
             {movie.overview}
           </Typography>
             { user &&
-                    <Button variant="contained" onClick={() => addToFavorite(movie.id, user.email)}>Favori</Button>
+                    <Button variant="contained" onClick={() => addToFavorite(movie, user.email)}>Favori</Button>
             }
         </CardContent>
       </CardActionArea>
