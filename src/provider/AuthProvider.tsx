@@ -1,4 +1,4 @@
-import React, {createContext, ReactNode, useState} from "react"
+import React, {createContext, ReactNode, useCallback, useState} from "react"
 import { User } from "firebase/auth";
 interface Props {
     children?: ReactNode
@@ -7,13 +7,17 @@ interface Props {
 export const AuthContext = createContext({
     user: {} as User | null,
     setUser: (_user: User) => {},
+    isLogged: (): boolean => { return false },
 })
 const AuthProvider = ({ children }: Props ) => {
 
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('@user')!))
+    const [user, setUser] = useState<User | null>(JSON.parse(localStorage.getItem('@user')!))
+    const isLogged = useCallback(() => {
+        return user !== null
+    }, [user])
 
     return (
-        <AuthContext.Provider value={{ user , setUser}}>
+        <AuthContext.Provider value={{ user , setUser, isLogged}}>
             {children}
         </AuthContext.Provider>
     )
