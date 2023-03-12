@@ -29,14 +29,14 @@ const Films = ({ apiKey, searchQueryHome }: Props) => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [sortOption, setSortOption] = useState<SortOption>(SortOption.Popularity);
 
-  console.log(searchQueryHome);
+  //console.log(searchQueryHome);
   if (searchQueryHome !== undefined) {
     setSearchQuery(searchQueryHome);
   }
 
-  useEffect(() => {
+  /*useEffect(() => {
     fetchMovies();
-  }, [sortOption]);
+  }, [sortOption]);*/
 
   const fetchMovies = async () => {
     const url = `https://api.themoviedb.org/3/discover/movie?sort_by=${sortOption}&api_key=${apiKey}`;
@@ -55,45 +55,6 @@ const Films = ({ apiKey, searchQueryHome }: Props) => {
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={2} justifyContent="center">
-        <Grid item xs={12} sm={6} className={classes.searchContainer}>
-          <form onSubmit={handleSearch}>
-            <TextField
-              variant="outlined"
-              label="Search movies"
-              fullWidth
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <Button variant="contained" color="primary" type="submit">
-              Search
-            </Button>
-          </form>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Button
-            color="primary"
-            onClick={() => setSortOption(SortOption.Popularity)}
-            disabled={sortOption === 'popularity.desc'}
-          >
-            Sort by popularity
-          </Button>
-          <Button
-            color="primary"
-            onClick={() => setSortOption(SortOption.Rating)}
-            disabled={sortOption === 'vote_average.desc'}
-          >
-            Sort by rating
-          </Button>
-          <Button
-            color="primary"
-            onClick={() => setSortOption(SortOption.ReleaseDate)}
-            disabled={sortOption === 'release_date.desc'}
-          >
-            Sort by release date
-          </Button>
-        </Grid>
-      </Grid>
       <Grid container spacing={2}>
         {movies.map((movie) => (
           <Grid item xs={12} sm={6} md={4} lg={3} key={movie.id}>

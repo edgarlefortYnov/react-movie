@@ -3,10 +3,10 @@ import { Navigate, useLocation } from 'react-router-dom'
 import { AuthContext } from '../provider/AuthProvider'
 
 const ProtectedRoute = ({ children }) => {
-    const { state } = useContext(AuthContext)
+    const { isLogged } = useContext(AuthContext)
     const location = useLocation()
 
-    if (!state.isLogged) {
+    if (!isLogged()) {
         // Si l'utilisateur n'est pas connecté, je le redirige vers la page de connexion
         return <Navigate to='/login' state={{ from: location }} />
     }

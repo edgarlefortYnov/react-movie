@@ -1,7 +1,6 @@
 import React from 'react';
 import {BrowserRouter, Route, Routes } from 'react-router-dom'
 import AuthProvider from './provider/AuthProvider'
-import Footer from './components/Footer';
 import Home from './pages/Home';
 import Layout from './pages/Layout';
 import Films from './pages/AllFilm';
@@ -9,6 +8,7 @@ import Login from './pages/Login';
 import Acteurs from './pages/AllActeur';
 import Favorite from './pages/Favorite';
 import Register from './pages/Register';
+import ProtectedRoute from './routes/ProtectedRoute'
 import './App.css';
 import './Layout.css';
 import './Home.css';
@@ -28,14 +28,17 @@ const App = () => {
                       <Route index element={<Home />} />
                       <Route path='all_films' element={<Films />} />
                       <Route path='all_acteurs' element={<Acteurs />} />
-                      <Route path='fav' element={<Favorite />} />
+                      <Route path='fav' element={
+                          <ProtectedRoute>
+                              <Favorite />
+                          </ProtectedRoute>
+                      } />
                       <Route path='register' element={<Register />} />
                       <Route path='login' element={<Login />} />
                   </Route>
               </Routes>
           </AuthProvider>
       </BrowserRouter>
-      <Footer />
     </div>
   );
 }

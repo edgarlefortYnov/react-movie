@@ -6,7 +6,7 @@ interface Props {
 
 export const AuthContext = createContext({
     user: {} as User | null,
-    setUser: (_user: User) => {},
+    setUser: (_user: User | null) => {},
     isLogged: (): boolean => { return false },
 })
 const AuthProvider = ({ children }: Props ) => {
