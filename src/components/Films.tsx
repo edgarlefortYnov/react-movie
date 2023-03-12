@@ -1,10 +1,9 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import MovieCard from './MovieCard';
-import { Movie, SortOption } from '../types/types';
+import { Movie } from '../types/types';
+import Pagination from "@material-ui/lab/Pagination";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,39 +17,26 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface Props {
-  apiKey: string;
-  searchQueryHome: string;
-}
-
-const Films = ({ apiKey, searchQueryHome }: Props) => {
+const Films = ( ) => {
   const classes = useStyles();
   const [movies, setMovies] = useState<Movie[]>([]);
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  const [sortOption, setSortOption] = useState<SortOption>(SortOption.Popularity);
-
-  //console.log(searchQueryHome);
-  if (searchQueryHome !== undefined) {
-    setSearchQuery(searchQueryHome);
-  }
-
-  /*useEffect(() => {
-    fetchMovies();
-  }, [sortOption]);*/
+  const [totalPages, setTotalPages] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   const fetchMovies = async () => {
-    const url = `https://api.themoviedb.org/3/discover/movie?sort_by=${sortOption}&api_key=${apiKey}`;
-    const response = await fetch(url);
-    const data = await response.json();
-    setMovies(data.results);
+      const response = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=ae1098c7af94ab11d9a8b077daac4007&language=en-US&page=${currentPage}`);
+      const data = await response.json();
+      setMovies(data.results);
+      setTotalPages(data.total_pages);
   };
 
-  const handleSearch = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const url = `https://api.themoviedb.org/3/search/movie?query=${searchQuery}&api_key=${apiKey}`;
-    const response = await fetch(url);
-    const data = await response.json();
-    setMovies(data.results);
+  useEffect(() => {
+    fetchMovies();
+  }, [currentPage]);
+
+
+  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setCurrentPage(value);
   };
 
   return (
@@ -62,6 +48,9 @@ const Films = ({ apiKey, searchQueryHome }: Props) => {
           </Grid>
         ))}
       </Grid>
+      {totalPages > 1 && (
+          <Pagination className='pagination-actors' count={totalPages} page={currentPage} onChange={handlePageChange} />
+      )}
     </div>
   );
 };
