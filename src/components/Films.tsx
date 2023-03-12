@@ -1,10 +1,9 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import MovieCard from './MovieCard';
-import { Movie, SortOption } from '../types/types';
+import { Movie } from '../types/types';
+import Pagination from "@material-ui/lab/Pagination";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,82 +17,31 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface Props {
-  apiKey: string;
-  searchQueryHome?: string;
-}
+const Films = ( ) => {
 
-const Films = ({ apiKey, searchQueryHome }: Props) => {
   const classes = useStyles();
   const [movies, setMovies] = useState<Movie[]>([]);
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  const [sortOption, setSortOption] = useState<SortOption>(SortOption.Popularity);
+  const [totalPages, setTotalPages] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
-  console.log(searchQueryHome);
-  if (searchQueryHome !== undefined) {
-    setSearchQuery(searchQueryHome);
-  }
+  const fetchMovies = async () => {
+      const response = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=ae1098c7af94ab11d9a8b077daac4007&language=en-US&page=${currentPage}`);
+      const data = await response.json();
+      setMovies(data.results);
+      setTotalPages(data.total_pages);
+  };
 
   useEffect(() => {
     fetchMovies();
-  }, [sortOption]);
+  }, [currentPage]);
 
-  const fetchMovies = async () => {
-    const url = `https://api.themoviedb.org/3/discover/movie?sort_by=${sortOption}&api_key=${apiKey}`;
-    const response = await fetch(url);
-    const data = await response.json();
-    setMovies(data.results);
-  };
 
-  const handleSearch = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const url = `https://api.themoviedb.org/3/search/movie?query=${searchQuery}&api_key=${apiKey}`;
-    const response = await fetch(url);
-    const data = await response.json();
-    setMovies(data.results);
+  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setCurrentPage(value);
   };
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={2} justifyContent="center">
-        <Grid item xs={12} sm={6} className={classes.searchContainer}>
-          <form onSubmit={handleSearch}>
-            <TextField
-              variant="outlined"
-              label="Search movies"
-              fullWidth
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <Button variant="contained" color="primary" type="submit">
-              Search
-            </Button>
-          </form>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Button
-            color="primary"
-            onClick={() => setSortOption(SortOption.Popularity)}
-            disabled={sortOption === 'popularity.desc'}
-          >
-            Sort by popularity
-          </Button>
-          <Button
-            color="primary"
-            onClick={() => setSortOption(SortOption.Rating)}
-            disabled={sortOption === 'vote_average.desc'}
-          >
-            Sort by rating
-          </Button>
-          <Button
-            color="primary"
-            onClick={() => setSortOption(SortOption.ReleaseDate)}
-            disabled={sortOption === 'release_date.desc'}
-          >
-            Sort by release date
-          </Button>
-        </Grid>
-      </Grid>
       <Grid container spacing={2}>
         {movies.map((movie) => (
           <Grid item xs={12} sm={6} md={4} lg={3} key={movie.id}>
@@ -101,6 +49,9 @@ const Films = ({ apiKey, searchQueryHome }: Props) => {
           </Grid>
         ))}
       </Grid>
+      {totalPages > 1 && (
+          <Pagination className='pagination-actors' count={totalPages} page={currentPage} onChange={handlePageChange} />
+      )}
     </div>
   );
 };
