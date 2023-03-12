@@ -22,7 +22,7 @@ const ActorCard: React.FC<ActorCardProps> = ({ actor }) => {
   return (
     <Card className={classes.root}>
       <CardActionArea>
-        <CardMedia className={classes.media} image={actor.profile_path} title={actor.name} />
+        <CardMedia className={classes.media} image={"https://image.tmdb.org/t/p/original/" + actor.profile_path} title={actor.name} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
             {actor.name}

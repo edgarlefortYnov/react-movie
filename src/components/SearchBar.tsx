@@ -3,7 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { useNavigate } from "react-router-dom";
 
-const SearchBar = () => {    
+const SearchBar = () => {
     const [searchQueryHome, setSearchQueryHome] = useState<string>('');
     const navigate = useNavigate();
 
@@ -11,7 +11,6 @@ const SearchBar = () => {
         event.preventDefault();
         console.log(searchQueryHome);
         navigate("/all_films", {state: searchQueryHome});
-        // alert('A name was submitted: ' + searchQueryHome);
       };
 
     return (

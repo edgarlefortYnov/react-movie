@@ -7,12 +7,12 @@ import { getAuth } from 'firebase/auth'
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyDGClB86Txf1T-GVjAsdyLlocAQ1JlYBU8",
-    authDomain: "react-movie-99e1e.firebaseapp.com",
-    projectId: "react-movie-99e1e",
-    storageBucket: "react-movie-99e1e.appspot.com",
-    messagingSenderId: "339786112009",
-    appId: "1:339786112009:web:ce7ec271addb746d95acd8"
+    apiKey: "AIzaSyDfaX9cZEyRC4xa9A6GVs8fzIXk-Uz5p_A",
+    authDomain: "movie-react-5aa6c.firebaseapp.com",
+    projectId: "movie-react-5aa6c",
+    storageBucket: "movie-react-5aa6c.appspot.com",
+    messagingSenderId: "544625352182",
+    appId: "1:544625352182:web:4159ddf94ced78dec1bbd7"
 };
 
 // Initialize Firebase
@@ -21,3 +21,4 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app)
 // Initialize Auth
 const auth = getAuth(app)
+export { db, auth }
