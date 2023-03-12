@@ -10,6 +10,7 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import {useContext} from "react";
 import {AuthContext} from "../provider/AuthProvider";
+import { useNavigate } from 'react-router';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -29,7 +30,14 @@ interface Props {
 const MovieCard = ({ movie }: Props) => {
 
     const classes = useStyles();
+    const navigate = useNavigate();
     const { user } = useContext(AuthContext)
+
+    const handleClick = () => {
+      navigate(`/description_film?movieId=${movie.id}`);
+      return null;
+    }
+    
     const addToFavorite = async (movie: Movie, email: string | null) => {
         console.log("button triggered")
         await addDoc(collection(db, "favorites"), {
@@ -41,7 +49,7 @@ const MovieCard = ({ movie }: Props) => {
 
   return (
     <Card className={classes.root}>
-      <CardActionArea>
+      <CardActionArea onClick={handleClick}>
         <CardMedia
           className={classes.media}
           image={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}

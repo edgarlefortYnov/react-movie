@@ -9,6 +9,7 @@ import Acteurs from './pages/AllActeur';
 import Favorite from './pages/Favorite';
 import Register from './pages/Register';
 import ProtectedRoute from './routes/ProtectedRoute'
+import DescrFilm from './pages/DescriptionFilm';
 import './App.css';
 import './Layout.css';
 import './Home.css';
@@ -27,6 +28,7 @@ const App = () => {
                   <Route path='/' element={<Layout />}>
                       <Route index element={<Home />} />
                       <Route path='all_films' element={<Films />} />
+                      <Route path='description_film' element={<DescrFilm />} />
                       <Route path='all_acteurs' element={<Acteurs />} />
                       <Route path='fav' element={
                           <ProtectedRoute>
