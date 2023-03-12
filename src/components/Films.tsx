@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const Films = ( ) => {
+
   const classes = useStyles();
   const [movies, setMovies] = useState<Movie[]>([]);
   const [totalPages, setTotalPages] = useState<number>(0);
