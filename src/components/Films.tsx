@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface Props {
   apiKey: string;
-  searchQueryHome: string;
+  searchQueryHome?: string;
 }
 
 const Films = ({ apiKey, searchQueryHome }: Props) => {
